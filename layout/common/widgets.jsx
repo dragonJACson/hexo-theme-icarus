@@ -83,7 +83,11 @@ class Widgets extends Component {
                 try {
                     let Widget = view.require('widget/' + widget.type);
                     Widget = Widget.Cacheable ? Widget.Cacheable : Widget;
-                    return <Widget site={site} helper={helper} config={config} page={page} widget={widget} />;
+                    if (widget.type === 'archives') {
+                        return <Widget site={site} helper={helper} config={config} page={page} widget={widget} type="yearly" />;
+                    } else {
+                        return <Widget site={site} helper={helper} config={config} page={page} widget={widget} />;
+                    }
                 } catch (e) {
                     logger.w(`Icarus cannot load widget "${widget.type}"`);
                 }
